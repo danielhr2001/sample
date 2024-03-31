@@ -3,10 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Post;
+use App\Models\PostUserLike;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -19,7 +21,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'is_admin', //* "0->user,1->admin"
+        'is_ban', //* "0->is not ban,1->is ban"
         'email',
+        'phone_number',
         'password',
     ];
 
@@ -42,4 +47,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function postUserLikes()
+    {
+        return $this->hasMany(PostUserLike::class);
+    }
 }
