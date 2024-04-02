@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\API\V1;
+namespace App\Http\Requests\API\V1\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Response;
 
-class StorePostUserLikeRequest extends FormRequest
+class StorePostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,9 @@ class StorePostUserLikeRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'title' => ['required', 'string', 'min:2', 'max:32'],
+            'body' => ['required', 'string', 'min:8', 'max:512'],
             'user_id' => ['required', 'numeric', 'min:1', 'exists:users,id'],
-            'post_id' => ['required', 'numeric', 'min:1', 'exists:posts,id'],
         ];
     }
 

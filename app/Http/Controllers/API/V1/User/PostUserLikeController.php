@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API\V1\User;
 
 use App\Models\PostUserLike;
-use App\Http\Requests\StorePostUserLikeRequest;
-use App\Http\Requests\UpdatePostUserLikeRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\API\V1\User\StorePostUserLikeRequest;
 
 class PostUserLikeController extends Controller
 {
@@ -20,22 +20,6 @@ class PostUserLikeController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StorePostUserLikeRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(PostUserLike $postUserLike)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdatePostUserLikeRequest $request, PostUserLike $postUserLike)
     {
         //
     }

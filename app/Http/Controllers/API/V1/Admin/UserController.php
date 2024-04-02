@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API\V1\Admin;
 
 use App\Models\User;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\API\V1\Admin\StoreUserRequest;
+use App\Http\Requests\API\V1\Admin\UpdateUserRequest;
 
 class UserController extends Controller
 {

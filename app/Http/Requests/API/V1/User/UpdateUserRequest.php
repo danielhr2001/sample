@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Requests\API\V1;
+namespace App\Http\Requests\API\V1\User;
 
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Response;
 
-class UpdatePostRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +26,8 @@ class UpdatePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['string', 'min:2', 'max:32'],
-            'body' => ['string', 'min:8', 'max:512'],
+            'name' => ['string', 'min:2', 'max:16'],
+            'password' => ['nullable', Password::min(6)->mixedCase()->numbers()],
         ];
     }
 
