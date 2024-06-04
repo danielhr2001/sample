@@ -13,15 +13,7 @@ class PostUserLikePolicy
      */
     public function viewAny(User $user): bool
     {
-        //
-    }
-
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, PostUserLike $postUserLike): bool
-    {
-        //
+        return true;
     }
 
     /**
@@ -29,38 +21,16 @@ class PostUserLikePolicy
      */
     public function create(User $user): bool
     {
-        //
-    }
-
-    /**
-     * Determine whether the user can update the model.
-     */
-    public function update(User $user, PostUserLike $postUserLike): bool
-    {
-        //
+        return true;
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, PostUserLike $postUserLike): bool
+    public function delete(User $user, PostUserLike $postUserLike): Response
     {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, PostUserLike $postUserLike): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, PostUserLike $postUserLike): bool
-    {
-        //
+        return $user->id === $postUserLike->user_id
+            ? Response::allow()
+            : Response::deny('این لایک متعلق به شما نیست.');
     }
 }
