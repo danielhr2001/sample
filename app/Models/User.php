@@ -24,6 +24,7 @@ class User extends Authenticatable
         'name',
         'is_admin', //* "0->user,1->admin"
         'is_ban', //* "0->is not ban,1->is ban"
+        'activation_status', //* "0->is not active,1->is active"
         'email',
         'phone_number',
         'password',
