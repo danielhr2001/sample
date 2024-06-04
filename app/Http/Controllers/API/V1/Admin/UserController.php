@@ -14,7 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::paginate();
+        return response()->json($users);
     }
 
     /**
@@ -22,30 +23,28 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        //
+        $input = $request->validated();
+        $new_user = User::create($input);
+        return response()->json($new_user, 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show($user_id)
     {
-        //
+        $user = User::where('id', $user_id)->with(['posts', 'postUserLikes', 'OTPs'])->firstOrFail();
+        return response()->json($user);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateUserRequest $request, $user_id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(User $user)
-    {
-        //
+        $input = $request->validated();
+        $user = User::where('id', $user_id)->with(['posts', 'postUserLikes', 'OTPs'])->firstOrFail();
+        $user->update($input);
+        return response()->json($user);
     }
 }

@@ -13,22 +13,7 @@ class PostUserLikeController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StorePostUserLikeRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(PostUserLike $postUserLike)
-    {
-        //
+        $post_user_likes = PostUserLike::with(['post','user:id,name'])->paginate();
+        return response()->json($post_user_likes);
     }
 }

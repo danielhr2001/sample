@@ -33,16 +33,19 @@ class PostController extends Controller
      */
     public function show($post_id)
     {
-        $post = Post::where('id', $post_id)->with(['postUserLikes', 'user'])->first();
+        $post = Post::where('id', $post_id)->with(['postUserLikes', 'user'])->firstOrFail();
         return response()->json($post);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePostRequest $request, Post $post_id)
+    public function update(UpdatePostRequest $request, $post_id)
     {
-        //
+        $inputs = $request->validated();
+        $post = Post::where('id', $post_id)->with(['user:id,name', 'postUserLikes'])->firstOrFail();
+        $post->update($inputs);
+        return response()->json($post);
     }
 
     /**
@@ -50,6 +53,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return response()->json(["message" => "پست با موفقیت پاک شد"]);
     }
 }

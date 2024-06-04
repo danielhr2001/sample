@@ -19,8 +19,9 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show($post_id)
     {
-        //
+        $post = Post::where('id', $post_id)->with(['user', 'postUserLikes'])->firstOrFail();
+        return response()->json($post);
     }
 }
