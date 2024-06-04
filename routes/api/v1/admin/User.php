@@ -6,8 +6,7 @@ use App\Http\Controllers\API\V1\Admin\UserController;
 
 Route::prefix('User')->controller(UserController::class)->group(function () {
     Route::get('/','index');
-    Route::get('{user}','show');
+    Route::get('{id}','show');
     Route::post('/', 'store');
-    Route::put('/{user}', 'update');
-    Route::delete('/{user}', 'destroy');
+    Route::put('/{id}', 'update');
 });
