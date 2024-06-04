@@ -55,13 +55,15 @@ class AuthController extends Controller
         if (!isset($user)) {
             return response()->json(["message" => "اطلاعات ورودی تطابق ندارد"], 400);
         }
-        $OTP_code_expire_at = Carbon::createFromFormat('Y-m-d H:i:s', $user->latestOTP->expire_at);
-        $now = Carbon::createFromFormat('Y-m-d H:i:s', now());
-        if ($user->latestOTP->code != $inputs['OTP_code']) {
-            return response()->json(["message" => "کد نادرست است"], 400);
-        } else
-        if ($now->greaterThan($OTP_code_expire_at)) {
-            return response()->json(["message" => "کد منقضی شده است"], 400);
+        if($user->latestOTP){
+            $OTP_code_expire_at = Carbon::createFromFormat('Y-m-d H:i:s', $user->latestOTP->expire_at);
+            $now = Carbon::createFromFormat('Y-m-d H:i:s', now());
+            if ($user->latestOTP->code != $inputs['OTP_code']) {
+                return response()->json(["message" => "کد نادرست است"], 400);
+            } else
+            if ($now->greaterThan($OTP_code_expire_at)) {
+                return response()->json(["message" => "کد منقضی شده است"], 400);
+            }
         }
         if (!$user->activation_status) {
             $user->activation_status = 1;

@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->unsignedTinyInteger('is_ban')->default(0)->comment("0->is not ban,1->is ban");
             $table->unsignedTinyInteger('is_admin')->default(0)->comment("0->user,1->admin");
+            $table->unsignedTinyInteger('activation_status')->default(0)->comment("0->is not active,1->is active");
             $table->string('email')->nullable()->unique();
             $table->string('phone_number')->unique();
             $table->timestamp('email_verified_at')->nullable();
