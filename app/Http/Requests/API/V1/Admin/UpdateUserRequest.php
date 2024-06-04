@@ -30,7 +30,7 @@ class UpdateUserRequest extends FormRequest
             'is_admin' => ['numeric', 'min:0', 'max:1'], //* "0->user,1->admin"
             'is_ban' => ['numeric', 'min:0', 'max:1'], //* "0->is not ban,1->is ban"
             'email' => ['nullable', 'email', 'unique:users,email'],
-            'phone_number' => ['numeric', 'starts_with:01', 'digits:11', 'unique:users,phone_number'],
+            'phone_number' => ['numeric', 'starts_with:09', 'digits:11', 'unique:users,phone_number'],
             'password' => ['nullable', Password::min(6)->mixedCase()->numbers()],
         ];
     }

@@ -25,7 +25,7 @@ class LoginByPasswordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'phone_number' => ['required_without:email', 'numeric', 'starts_with:01', 'digits:11', 'unique:users,phone_number'],
+            'phone_number' => ['required_without:email', 'numeric', 'starts_with:09', 'digits:11', 'unique:users,phone_number'],
             'email' => ['required_without:phone_number', 'email', 'unique:users,email'],
             'password' => ['required', 'numeric'],
         ];

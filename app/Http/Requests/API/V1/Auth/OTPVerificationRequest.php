@@ -26,7 +26,7 @@ class OTPVerificationRequest extends FormRequest
     {
         return [
             'otp_code' => ['required', 'numeric', 'digits:6'],
-            'phone_number' => ['required', 'numeric', 'starts_with:01', 'digits:11', 'unique:users,phone_number'],
+            'phone_number' => ['required', 'numeric', 'starts_with:09', 'digits:11'],
         ];
     }
 
