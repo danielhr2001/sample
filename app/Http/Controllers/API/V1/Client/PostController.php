@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API\V1\Client;
 
 use App\Models\Post;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PostCollection;
+use App\Http\Resources\PostResource;
 
 class PostController extends Controller
 {
@@ -13,7 +15,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::paginate();
-        return response()->json($posts);
+        return new PostCollection($posts);
     }
 
     /**
@@ -21,7 +23,7 @@ class PostController extends Controller
      */
     public function show($post_id)
     {
-        $post = Post::where('id', $post_id)->with(['user', 'postUserLikes'])->firstOrFail();
-        return response()->json($post);
+        $post = Post::with('user')->find($post_id);
+        return new PostResource($post->loadCount('postUserLikes'));
     }
 }
